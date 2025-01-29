@@ -16,7 +16,11 @@ neo is an **open-source**, full-stack application that brings together the power
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
 ![Solana](https://img.shields.io/badge/Solana-14F195?style=flat-square&logo=solana&logoColor=white&color=black)
 
-![Product Demo](./public/product.png)
+
+<video width="320" height="240" controls autoplay loop>
+  <source src="./public/neo_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Features
 
