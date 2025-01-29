@@ -1,14 +1,14 @@
 version: "3.8"
 
 services:
-  Geer-app:
+  neo-app:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: "Geer-app"
+    container_name: "neo-app"
     depends_on:
-      Geer-db:
+      neo-db:
         condition: service_healthy
     expose:
       - "3000"
@@ -19,24 +19,24 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@Geer-db:5432/Geerdb
-      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@Geer-db:5432/Geerdb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neo-db:5432/neodb
+      - DIRECT_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neo-db:5432/neodb
     volumes:
       - .:/usr/src/app
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  Geer-studio:
+  neo-studio:
     build:
       context: .
       dockerfile: Dockerfile.local
       target: dev
-    container_name: "Geer-studio"
+    container_name: "neo-studio"
     depends_on:
-      Geer-db:
+      neo-db:
         condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@Geer-db:5432/Geerdb
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@neo-db:5432/neodb
     expose:
       - "5555"
     ports:
@@ -48,9 +48,9 @@ services:
       - root_node_modules:/usr/src/app/node_modules
       - webapp_next:/usr/src/app/.next
 
-  Geer-db:
+  neo-db:
     image: "postgres:15"
-    container_name: "Geer-db"
+    container_name: "neo-db"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 10s
@@ -62,9 +62,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - "Geer-db-data:/var/lib/postgresql/data"
+      - "neo-db-data:/var/lib/postgresql/data"
 
 volumes:
-  Geer-db-data:
+  neo-db-data:
   root_node_modules:
   webapp_next:
